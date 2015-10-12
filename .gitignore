@@ -1,0 +1,7 @@
+# Vim Swap-File and PyCache Files
+*.swp
+*.pyc
+__pycache__/*
+
+# Config File(s)
+SheepClicker/settings.py
