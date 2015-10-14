@@ -8,3 +8,6 @@ SheepClicker/settings.py
 
 # Database File
 db.sqlite3
+
+#Pycharm project files
+/.idea/*
