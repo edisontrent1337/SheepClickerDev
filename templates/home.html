@@ -1,2 +1,26 @@
-{% load staticfiles %}
-<img src="{% static 'blue_tiled_cube.png' %}" alt="wtf"/>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Testing Django</title>
+    <meta name="description" content="">
+    <meta name="edisontrent1337" content="">
+    <meta name="keywords" content="">
+
+    {% load staticfiles %}
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
+</head>
+
+
+<div id="header">
+
+</div>
+<div id="content">
+    {% load staticfiles %}
+    <img src="{% static 'img/blue_tiled_cube.png' %}" alt="wtf"/>
+</div>
+<div id="footer"></div>
+
+</body>
+</html>
