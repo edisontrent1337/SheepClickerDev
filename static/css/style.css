@@ -1,9 +1,36 @@
 body {
     width:100%;
+    font-family: 'Roboto Condensed', sans-serif;
+    margin:0px auto;
 }
 
 #content {
     width:1000px;
-    border:1px solid red;
     margin:0px auto;
 }
+
+.button_blue, .button_green {
+    font-size:16px;
+    font-weight:300;
+	display:inline-block;
+	text-align: center;
+	text-decoration: none;
+	color: white;
+	background-color:#13c71f;
+	padding: 5px 10px;
+	transition: background-color 0.2s;
+	transition: box-shadow 0.2s;
+
+	cursor:pointer;
+	margin:10px;
+	border-radius: 3px;
+}
+
+.button_blue {
+    background:url(../img/button_blue.png);
+    border:1px solid #0381d1;
+    }
+.button_green {
+    background:url(../img/button_green.png);
+    border:1px solid #05c72e;
+    }
