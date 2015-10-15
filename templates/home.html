@@ -12,9 +12,13 @@
     <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic' rel='stylesheet'
+          type='text/css'>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+
 
 </head>
 
@@ -24,10 +28,9 @@
 </div>
 <div id="content">
     {% load staticfiles %}
-   <!-- <img src="{% static 'img/blue_tiled_cube.png' %}" alt="wtf"/>
+    <!-- <img src="{% static 'img/blue_tiled_cube.png' %}" alt="wtf"/>
 
-    <input type="button" class="button" value="Increase Income"/>-->
-
+     <input type="button" class="button" value="Increase Income"/>-->
 
 
     <input type="button" class="button_blue" id="mine" value="MINE"/>
@@ -36,15 +39,14 @@
     <span>Res:</span><span id="res">0</span></span>
     <span>Update Rate:</span> <span id="upd">0.02</span></span>
     <span>Level:</span><span id="level">1</span>
-     <span>Ugrade Cost:</span><span id="cost">75</span>
+    <span>Ugrade Cost:</span><span id="cost">50</span>
 
 
-
-        <script>
+    <script>
         var rate = 0.01;
         var value = 0;
         var level = 1;
-        var cost = 75;
+        var cost = 50;
 
         var baseCost = 50;
 
@@ -59,23 +61,30 @@
         });
 
 
+        $(function() {
+             setInterval("updateView()", 2000)
+        });
+
         function updateData() {
-            var formVal = parseInt($('#res').html());
             value+=rate;
-            if(value - formVal >= 1) {
+        }
+
+        function updateView() {
+             var formVal = parseInt($('#res').html());
+             if(value - formVal >= 1) {
                 $('#res').text(parseInt(value));
             }
         }
 
 
+
         $('#upgrade').click(function() {
 
             if(value > cost) {
-                rate = Math.round((rate*1.03 + 0.01*level)*100)/100;
+                rate = Math.round((rate*1.03 + 0.004*level)*100)/100;
                 value = value - cost;
                 level++;
-                baseCost+= 0.10*0.01*level*baseCost;
-                cost = Math.round(baseCost*level*1.05);
+                cost = Math.round(Math.pow(1.5, level)*baseCost);
                 $('#cost').text(cost);
                 $('#res').text(parseInt(value));
                 $('#upd').text(rate);
@@ -85,8 +94,14 @@
 
 
         $('#mine').click(function() {
-            value++;
+          var formVal = parseInt($('#res').html());
+                value = value + 1000;
+             if(value - formVal >= 1) {
+                $('#res').text(parseInt(value));
+            }
+
         });
+
 
 
     </script>
