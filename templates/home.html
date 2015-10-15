@@ -36,58 +36,77 @@
     <span>Res:</span><span id="res">0</span></span>
     <span>Update Rate:</span> <span id="upd">0.02</span></span>
     <span>Level:</span><span id="level">1</span>
-     <span>Ugrade Cost:</span><span id="cost">75</span>
+    <span>Ugrade Cost:</span><span id="cost">75</span>
+    <span>Per Click:</span><span id="perClick">1</span>
 
 
 
         <script>
-        var rate = 0.01;
-        var value = 0;
-        var level = 1;
-        var cost = 75;
 
+        var credit = 0; // players credit that can be spent on upgrades
+        var perClick = 1; // players profit per mining
+        var rate = 1; // amount added to players credit per second
+        var level = 1; // current player level. increased by upgrade
+        var upgradeCost = 75; // score needed to rise level
         var baseCost = 50;
 
-        alert(rate);
-        $(document).ready(function() {
-            alert("jQuery is up");
-        });
 
+        $(document).ready( function() {  });
 
-        $(function() {
-             setInterval("updateData()", 50)
-        });
+        //update every second
+        window.setInterval("updateData()", 1000);
 
-
-        function updateData() {
-            var formVal = parseInt($('#res').html());
-            value+=rate;
-            if(value - formVal >= 1) {
-                $('#res').text(parseInt(value));
-            }
+        /** Update the Data presented in the view */
+        function updateView() {
+          $('#res').html(credit);
+          $('#upd').html(rate);
+          $('#level').html(level);
+          $('#cost').html(upgradeCost);
+          $('#perClick').html(perClick);
         }
 
+        /** Update the Data in the model */
+        function updateData() {
+          addCredit(rate);
+          updateView();
+        }
 
+        /** Increase Credit by given amount (decrease if negative) */
+        function addCredit(amount) {
+          credit += amount;
+
+          // TODO make '100' variable
+          if (credit % 100 == 0) {
+            unlockAchievement();
+          }
+        }
+
+        /** User reached specific milestone (e.g. total score, 1000 credits ...)
+        * celebrate it ... with popups!
+        */
+        function unlockAchievement(data) {
+          alert ("Achievement unlocked!");
+        }
+
+        /** Increase credit by doing something useful, like clicking a button */
+        $('#mine').click (function() {
+          addCredit(perClick);
+          updateView();
+        });
+
+        /** Upgrade player level --> rise credit per second */
         $('#upgrade').click(function() {
+            if(credit > upgradeCost) {
+                rate = Math.floor(rate*1.5 + level);
+                addCredit(-upgradeCost);
 
-            if(value > cost) {
-                rate = Math.round((rate*1.03 + 0.01*level)*100)/100;
-                value = value - cost;
                 level++;
                 baseCost+= 0.10*0.01*level*baseCost;
-                cost = Math.round(baseCost*level*1.05);
-                $('#cost').text(cost);
-                $('#res').text(parseInt(value));
-                $('#upd').text(rate);
-                $('#level').text(level);
+                upgradeCost = Math.floor(baseCost*level*1.5);
+
+                updateView();
              }
         });
-
-
-        $('#mine').click(function() {
-            value++;
-        });
-
 
     </script>
 
