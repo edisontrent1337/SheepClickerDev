@@ -30,11 +30,11 @@
 
 
 
-    <div class="button_blue" id="mine">MINE</div>
-    <div class="button_green" id="upgrade">UPGRADE</div>
+    <input type="button" class="button_blue" id="mine" value="MINE"/>
+    <input type="button" class="button_green" id="upgrade" value="UPGRADE"/>
 
     <span>Res:</span><span id="res">0</span></span>
-    <span>Update Rate:</span> <span id="upd">1</span></span>
+    <span>Update Rate:</span> <span id="upd">0.02</span></span>
     <span>Level:</span><span id="level">1</span>
 
 
@@ -43,6 +43,9 @@
         var rate = 0.02;
         var value = 0;
         var level = 1;
+
+        var basecost = 50;
+
         alert(rate);
         $(document).ready(function() {
             alert("jQuery is up");
@@ -65,10 +68,11 @@
 
         $('#upgrade').click(function() {
 
-            if(value > 20*level) {
-                rate = rate*1.2;
-                value = value - 20*level;
+            if(value > basecost*level) {
+                rate = Math.round((rate*1.2 + 0.02*level)*100)/100;
+                value = value - basecost*level;
                 level++;
+                basecost+=level;
                 $('#res').text(parseInt(value));
                 $('#upd').text(rate);
                 $('#level').text(level);
