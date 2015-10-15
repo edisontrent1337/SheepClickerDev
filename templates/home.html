@@ -36,15 +36,17 @@
     <span>Res:</span><span id="res">0</span></span>
     <span>Update Rate:</span> <span id="upd">0.02</span></span>
     <span>Level:</span><span id="level">1</span>
+     <span>Ugrade Cost:</span><span id="cost">75</span>
 
 
 
         <script>
-        var rate = 0.02;
+        var rate = 0.01;
         var value = 0;
         var level = 1;
+        var cost = 75;
 
-        var basecost = 50;
+        var baseCost = 50;
 
         alert(rate);
         $(document).ready(function() {
@@ -60,7 +62,7 @@
         function updateData() {
             var formVal = parseInt($('#res').html());
             value+=rate;
-            if(value - formVal >1) {
+            if(value - formVal >= 1) {
                 $('#res').text(parseInt(value));
             }
         }
@@ -68,11 +70,13 @@
 
         $('#upgrade').click(function() {
 
-            if(value > basecost*level) {
-                rate = Math.round((rate*1.2 + 0.02*level)*100)/100;
-                value = value - basecost*level;
+            if(value > cost) {
+                rate = Math.round((rate*1.03 + 0.01*level)*100)/100;
+                value = value - cost;
                 level++;
-                basecost+=level;
+                baseCost+= 0.10*0.01*level*baseCost;
+                cost = Math.round(baseCost*level*1.05);
+                $('#cost').text(cost);
                 $('#res').text(parseInt(value));
                 $('#upd').text(rate);
                 $('#level').text(level);
