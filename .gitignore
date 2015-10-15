@@ -4,7 +4,7 @@
 __pycache__/*
 
 # Config File(s)
-SheepClicker/settings.py
+# SheepClicker/settings.py
 
 # Database File
 db.sqlite3
