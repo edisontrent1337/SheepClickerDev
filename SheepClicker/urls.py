@@ -17,7 +17,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from sheepclick import views
 
+admin.autodiscover()
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^sheep/', views.sheep, name='sheep')
+    url(r'^sheep/', views.sheep, name='sheep'),
+    url(r'^(?P<slug>[\w\-]+)/$', 'blog.views.post'),
+    url(r'^$', 'blog.views.index'),
 ]

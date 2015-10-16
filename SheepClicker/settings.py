@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Django settings for SheepClicker project.
 
@@ -32,12 +33,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sheepclick',
+    'blog',
 )
 
 MIDDLEWARE_CLASSES = (
