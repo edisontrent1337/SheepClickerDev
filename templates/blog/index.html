@@ -1,24 +1,16 @@
 {% extends 'base.html' %}
 
 
-{% block title %} Blog Archive {% endblock %}
+{% block title %} Sheep's Blog {% endblock %}
 
 {% block content %}
-    <h1> Simple Blog Implementation </h1>
-    {% for post in posts %}
-    <div class="post">
-        <h2>
-            <a href="{{post.get_absolute_url}}">
-                {{post.title}}
-            </a>
-        </h2>
-        <p>{{post.description}}</p>
-        <p>
-            Posted on
-            <time datetime="{{post.created|date:"c"}}">
-            {{post.created|date}}
-            </time>
-        </p>
+<div class="container">
+  <div class="row">
+    <div class="column">
+      <h1 class="page-header">How not to make a clicker game</h1>
+      {% include "blog/postlist.html" %}
     </div>
-    {% endfor %}
+  </div>
+</div>
+
 {% endblock %}

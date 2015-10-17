@@ -3,19 +3,35 @@
 {% block title %}{{post.title}}{% endblock %}
 
 {% block content %}
-<article>
-    <header>
-        <h1> {{post.title}} </h1>
-        <p>
-            Posted on
-            <time datetime="{{post.created|date:"c"}}">
-            {{post.created|date}}
-            </time>
-        </p>
-    </header>
-    <p class="description">
-        {{post.description}}
-    </p>
-    {{post.content|safe}}
-</article>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-9" role="main">
+      <article>
+          <header class="page-header">
+              <h1> {{post.title}} </h1>
+              <h5>
+                   Posted on
+                  <time datetime="{{post.created|date:"c"}}">
+                  {{post.created|date}}
+                  </time>
+              </h5>
+          </header>
+          <p class="description lead">
+            {{post.description}}
+          </p>
+          <div class="main">
+            {{post.content|safe}}
+          </div>
+      </article>
+    </div>
+    <div class="col-xs-3" role="complementary">
+      <h4>See also:</h4>
+      <ul class="nav">
+        <li>
+          <a href="/sheep">Sheep Clicker - The Game</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 {% endblock %}
