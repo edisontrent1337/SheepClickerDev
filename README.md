@@ -19,7 +19,7 @@ virtual environment by running
 where venv is the name of your virtual environment. Now that you have created your own
 virtual environment, activate it by running
 
->'user@host:~/.../SheepClickerDev$ source /venv/bin/activate'
+>`user@host:~/.../SheepClickerDev$ source /venv/bin/activate`
 
 again 'venv' being the name of your virtual environment. If everything worked,
 your command line should look something like this:
@@ -29,11 +29,11 @@ your command line should look something like this:
 
 Now you can download and install the django server by running
 
->'(venv)user@host:~/.../SheepClickerDev$ pip install django'
+>`(venv)user@host:~/.../SheepClickerDev$ pip install django`
 
 You should see the latest version of django being listed in
 
->'(venv)user@host:~/.../SheepClickerDev$ pip freeze
+>`(venv)user@host:~/.../SheepClickerDev$ pip freeze`
 
 You have successfully installed the Django server. For more information, see
 the [Django Quick Installation Guide](https://docs.djangoproject.com/en/1.8/intro/install/)
@@ -46,14 +46,12 @@ for the first time, you need to migrate the models to your local database. Do
 
 In case you run into an encoding error
 
->'SyntaxError: Non-ASCII character '\xc2' in file /home/amdin/Development/DjangoBlog/SheepClickerDev/SheepClicker/settings.py
-on line 23, but no encoding declared; see http://www.python.org/peps/pep-0263.html
-for details'
+>`SyntaxError: Non-ASCII character '\xc2' in file /home/amdin/Development/DjangoBlog/SheepClickerDev/SheepClicker/settings.py on line 23, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details`
 
 You need to add the following line of code at the first line of your settings.py
 and then rerun the last command.
 
->'# coding=utf-8'
+>`# coding=utf-8`
 
 Now everything is set up and you can go ahead and run the SheepClicker project
 
