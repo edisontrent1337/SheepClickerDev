@@ -34,3 +34,24 @@ body {
     background:url(../img/button_green.png);
     border:1px solid #05c72e;
     }
+
+
+.resicon_small, .resicon_middle, .resicon_big {
+    float:left;
+    margin-right:10px;
+    }
+
+.resicon_small {
+        width:32px;
+    height:32px;
+    }
+
+.resicon_middle {
+        width:64px;
+    height:64px;
+    }
+
+.resicon_big {
+        width:128px;
+    height:128px;
+    }
