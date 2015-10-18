@@ -7,30 +7,25 @@
   <div class="row">
     <div class="col-xs-9" role="main">
       <article>
-          <header class="page-header">
-              <h1> {{post.title}} </h1>
-              <h5>
-                   Posted on
-                  <time datetime="{{post.created|date:"c"}}">
-                  {{post.created|date}}
-                  </time>
-              </h5>
-          </header>
-          <p class="description lead">
-            {{post.description}}
-          </p>
-          <div class="main">
-            {{post.content|safe}}
-          </div>
+        <header class="page-header">
+          <h1 class="text-left"> {{post.title}} </h1>
+          <h5 class="">
+               Posted on
+              <time datetime="{{post.created|date:"c"}}">
+              {{post.created|date}}
+              </time>
+          </h5>
+        </header>
+        <p class="lead">
+          {{post.description}}
+        </p>
+        <div class="main">
+          {{post.content|safe}}
+        </div>
       </article>
     </div>
     <div class="col-xs-3" role="complementary">
-      <h4>See also:</h4>
-      <ul class="nav">
-        <li>
-          <a href="/sheep">Sheep Clicker - The Game</a>
-        </li>
-      </ul>
+      {% include "blog/sidebar.html" %}
     </div>
   </div>
 </div>

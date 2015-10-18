@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'sheepclick',
     'blog',
+    'ckeditor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,9 +105,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/var/www/example.com/static/'
+
 
 # Static directory (CSS, JavaScript, Images)
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+# CKEditor for the Admin page requires jquery
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
