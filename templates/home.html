@@ -1,117 +1,123 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Testing Django</title>
-    <meta name="description" content="">
-    <meta name="edisontrent1337" content="">
-    <meta name="keywords" content="">
+{% block title %} Sheep's Blog {% endblock %}
 
-    {% load staticfiles %}
-    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic' rel='stylesheet' type='text/css'>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-</head>
-
-
-<div id="header">
-
+{% block content %}
+<div class="container">
+  <div class="row form-horizontal">
+    <h2>Your Level: <span id="level"></span></h2>
+    <input type="button" class="btn btn-danger" id="mine" value="SHEAR"/>
+    <input type="button" class="btn btn-success" id="upgrade" value="Buy Sheep"/>
+    <input type="button" class="btn btn-default" id="upg-worker" value="Buy Worker"/>
+  </div>
+  <div class="row">
+    <h2>Progress</h2>
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label for="res" class="col-xs-2">Credits:</label>
+        <span class="col-xs-4" id="res">0000</span>
+      </div>
+      <div class="form-group">
+        <label for="upd" class="col-xs-2">Credit per second:</label>
+        <span class="col-xs-4" id="upd">0000</span></span>
+      </div>
+      <div class="form-group">
+        <label for="cost" class="col-xs-2">Sheep Cost:</label>
+        <span class="col-xs-4" id="cost">75</span>
+      </div>
+      <div class="form-group">
+        <label for="perClick" class="col-xs-2">Credit per click:</label>
+        <span class="col-xs-4" id="perClick">1</span>
+      </div>
+      <div class="form-group">
+        <label for="upg-worker" class="col-xs-2">Worker Cost:</label>
+        <span class="col-xs-4" id="upgWorker">50</span>
+      </div>
+    </div>
+  </div>
 </div>
-<div id="content">
-    {% load staticfiles %}
-   <!-- <img src="{% static 'img/blue_tiled_cube.png' %}" alt="wtf"/>
-
-    <input type="button" class="button" value="Increase Income"/>-->
 
 
 
-    <input type="button" class="button_blue" id="mine" value="MINE"/>
-    <input type="button" class="button_green" id="upgrade" value="UPGRADE"/>
+<script>
 
-    <span>Res:</span><span id="res">0</span></span>
-    <span>Update Rate:</span> <span id="upd">0.02</span></span>
-    <span>Level:</span><span id="level">1</span>
-    <span>Ugrade Cost:</span><span id="cost">75</span>
-    <span>Per Click:</span><span id="perClick">1</span>
-
-
-
-        <script>
-
-        var credit = 0; // players credit that can be spent on upgrades
-        var perClick = 1; // players profit per mining
-        var rate = 1; // amount added to players credit per second
-        var level = 1; // current player level. increased by upgrade
-        var upgradeCost = 75; // score needed to rise level
-        var baseCost = 50;
+    var credit = 0; // players credit that can be spent on upgrades
+    var perClick = 1; // players profit per mining
+    var rate = 1; // amount added to players credit per second
+    var level = 1; // current player level. increased by upgrade
+    var upgradeCost = 75; // score needed to rise level
+    var workerCost = 50; // score needed to buy more workers
+    var baseCost = 50;
 
 
-        $(document).ready( function() {  });
+    $(document).ready( function() {  });
 
-        //update every second
-        window.setInterval("updateData()", 1000);
+    //update every second
+    window.setInterval("updateData()", 1000);
 
-        /** Update the Data presented in the view */
-        function updateView() {
-          $('#res').html(credit);
-          $('#upd').html(rate);
-          $('#level').html(level);
-          $('#cost').html(upgradeCost);
-          $('#perClick').html(perClick);
-        }
+    /** Update the Data presented in the view */
+    function updateView() {
+      $('#res').html(credit);
+      $('#upd').html(rate);
+      $('#level').html(level);
+      $('#cost').html(upgradeCost);
+      $('#perClick').html(perClick);
+      $('#upgWorker').html(workerCost);
+    }
 
-        /** Update the Data in the model */
-        function updateData() {
-          addCredit(rate);
-          updateView();
-        }
+    /** Update the Data in the model */
+    function updateData() {
+      addCredit(rate);
+      updateView();
+    }
 
-        /** Increase Credit by given amount (decrease if negative) */
-        function addCredit(amount) {
-          credit += amount;
+    /** Increase Credit by given amount (decrease if negative) */
+    function addCredit(amount) {
+      credit += amount;
 
-          // TODO make '100' variable
-          if (credit % 100 == 0) {
-            unlockAchievement();
-          }
-        }
+      // TODO make '100' variable
+      if (credit % 100 == 0) {
+        //unlockAchievement();
+      }
+    }
 
-        /** User reached specific milestone (e.g. total score, 1000 credits ...)
-        * celebrate it ... with popups!
-        */
-        function unlockAchievement(data) {
-          alert ("Achievement unlocked!");
-        }
+    /** User reached specific milestone (e.g. total score, 1000 credits ...)
+    * celebrate it ... with popups!
+    */
+    function unlockAchievement(data) {
+      alert ("Achievement unlocked!");
+    }
 
-        /** Increase credit by doing something useful, like clicking a button */
-        $('#mine').click (function() {
-          addCredit(perClick);
-          updateView();
-        });
+    /** Increase credit by doing something useful, like clicking a button */
+    $('#mine').click (function() {
+      addCredit(perClick);
+      updateView();
+    });
 
-        /** Upgrade player level --> rise credit per second */
-        $('#upgrade').click(function() {
-            if(credit > upgradeCost) {
-                rate = Math.floor(rate*1.5 + level);
-                addCredit(-upgradeCost);
+    /** Upgrade player level --> rise credit per second */
+    $('#upgrade').click(function() {
+      if(credit > upgradeCost) {
+        rate = Math.floor(rate*1.5 + level);
+        addCredit(-upgradeCost);
 
-                level++;
-                baseCost+= 0.10*0.01*level*baseCost;
-                upgradeCost = Math.floor(baseCost*level*1.5);
+        level++;
+        baseCost+= 0.10*0.01*level*baseCost;
+        upgradeCost = Math.floor(baseCost*level*1.5);
 
-                updateView();
-             }
-        });
+        updateView();
+       }
+    });
 
-    </script>
+    $('#upg-worker').click(function() {
+      if (credit > workerCost) {
+        perClick += 1;
+        addCredit(-workerCost);
+        workerCost = Math.round(workerCost * 1.5 + level);
 
-</div>
-<div id="footer"></div>
+        updateView();
+      }
+    })
 
-</body>
-</html>
+</script>
+
+{% endblock %}
