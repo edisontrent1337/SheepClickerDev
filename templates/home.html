@@ -2,20 +2,20 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Testing Django</title>
-    <meta name="description" content="">
-    <meta name="edisontrent1337" content="">
-    <meta name="keywords" content="">
+  <meta charset="UTF-8">
+  <title>Testing Django</title>
+  <meta name="description" content="">
+  <meta name="edisontrent1337" content="">
+  <meta name="keywords" content="">
 
-    {% load staticfiles %}
-    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic' rel='stylesheet'
-          type='text/css'>
+  {% load staticfiles %}
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic' rel='stylesheet'
+  type='text/css'>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 
 
@@ -27,101 +27,112 @@
 
 </div>
 <div id="content">
-    {% load staticfiles %}
-    <!-- <img src="{% static 'img/blue_tiled_cube.png' %}" alt="wtf"/>
+  {% load staticfiles %}
+  <!-- <img src="{% static 'img/blue_tiled_cube.png' %}" alt="wtf"/>
 
-     <input type="button" class="button" value="Increase Income"/>-->
-
-
-    <input type="button" class="button_blue" id="mine" value="MINE"/>
-    <input type="button" class="button_green" id="upgrade" value="UPGRADE"/>
-
-    <span>Res:</span><span id="res">0</span></span>
-    <span>Update Rate:</span> <span id="upd">0.02</span></span>
-    <span>Level:</span><span id="level">1</span>
-    <span>Ugrade Cost:</span><span id="cost">75</span>
-    <span>Per Click:</span><span id="perClick">1</span>
+  <input type="button" class="button" value="Increase Income"/>-->
 
 
+  <input type="button" class="button_blue" id="mine" value="MINE"/>
+  <input type="button" class="button_green" id="upgrade" value="UPGRADE"/>
 
-        <script>
-
-        var credit = 0; // players credit that can be spent on upgrades
-        var perClick = 1; // players profit per mining
-        var rate = 1; // amount added to players credit per second
-        var level = 1; // current player level. increased by upgrade
-        var upgradeCost = 75; // score needed to rise level
-        var baseCost = 50;
+  <span>Res:</span><span id="res">0</span></span>
+  <span>Update Rate:</span> <span id="upd">0.02</span></span>
+  <span>Level:</span><span id="level">1</span>
+  <span>Ugrade Cost:</span><span id="cost">75</span>
+  <span>Per Click:</span><span id="perClick">1</span>
 
 
-        $(document).ready( function() {  });
 
-        //update every second
-        window.setInterval("updateData()", 1000);
+  <script>
 
-        /** Update the Data presented in the view */
-        function updateView() {
-          $('#res').html(credit);
-          $('#upd').html(rate);
-          $('#level').html(level);
-          $('#cost').html(upgradeCost);
-          $('#perClick').html(perClick);
-        }
+  var credit = 0; // players credit that can be spent on upgrades
+  var perClick = 1; // players profit per mining
+  var rate = 1; // amount added to players credit per second
+  var level = 1; // current player level. increased by upgrade
+  var upgradeCost = 75; // score needed to rise level
+  var baseCost = 50;
 
-        /** Update the Data in the model */
-        function updateData() {
-          addCredit(rate);
-          updateView();
-        }
 
-        /** Increase Credit by given amount (decrease if negative) */
-        function addCredit(amount) {
-          credit += amount;
+  $(document).ready( function() {  });
 
-          // TODO make '100' variable
-          if (credit % 100 == 0) {
-            unlockAchievement();
-          }
-        }
+  //update every second
+  window.setInterval("updateData()", 1000);
 
-        /** User reached specific milestone (e.g. total score, 1000 credits ...)
-        * celebrate it ... with popups!
-        */
-        function unlockAchievement(data) {
-          alert ("Achievement unlocked!");
-        }
+  /** Update the Data presented in the view */
+  function updateView() {
+    $('#res').html(credit);
+    $('#upd').html(rate);
+    $('#level').html(level);
+    $('#cost').html(upgradeCost);
+    $('#perClick').html(perClick);
+  }
 
-        /** Increase credit by doing something useful, like clicking a button */
-        $('#mine').click (function() {
-          addCredit(perClick);
-          updateView();
-        });
+  /** Update the Data in the model */
+  function updateData() {
+    addCredit(rate);
+    updateView();
+  }
 
-        /** Upgrade player level --> rise credit per second */
-        $('#upgrade').click(function() {
-            if(credit > upgradeCost) {
-                rate = Math.floor(rate*1.5 + level);
-                addCredit(-upgradeCost);
+  /** Increase Credit by given amount (decrease if negative) */
+  function addCredit(amount) {
+    credit += amount;
 
-                level++;
-                baseCost+= 0.10*0.01*level*baseCost;
-                upgradeCost = Math.floor(baseCost*level*1.5);
+    // TODO make '100' variable
+    if (credit % 100 == 0) {
+      unlockAchievement();
+    }
+  }
 
-                updateView();
-             }
-        });
+  /** User reached specific milestone (e.g. total score, 1000 credits ...)
+  * celebrate it ... with popups!
+  */
+  function unlockAchievement(data) {
+    alert ("Achievement unlocked!");
+  }
 
-    </script>
+  /** Increase credit by doing something useful, like clicking a button */
+  $('#mine').click (function() {
+    addCredit(perClick);
+    updateView();
+  });
+
+  /** Upgrade player level --> rise credit per second */
+  $('#upgrade').click(function() {
+    if(credit > upgradeCost) {
+      rate = Math.floor(rate*1.5 + level);
+      addCredit(-upgradeCost);
+
+      level++;
+      baseCost+= 0.10*0.01*level*baseCost;
+      upgradeCost = Math.floor(baseCost*level*1.5);
+
+      updateView();
+    }
+  });
+
+  </script>
 
 </div>
 
 <div id="iconbar">
 
-{% load staticfiles %}
+  {% load staticfiles %}
 
-     <img src="{% static 'img/wood_blue.png' %}" alt="wtf" class="resicon_small"/>
-     <img src="{% static 'img/wood.png' %}" alt="wtf" class="resicon_middle"/>
-       <img src="{% static 'img/wood.png' %}" alt="wtf" class="resicon_big"/>
+<!--  <img src="{% static 'img/wood_blue.png' %}" alt="wtf" class="resicon_small"/>
+  <img src="{% static 'img/wood.png' %}" alt="wtf" class="resicon_middle"/>
+  <img src="{% static 'img/wood.png' %}" alt="wtf" class="resicon_big"/> -->
+
+</div>
+
+<div class="paper" id="resBar">
+  {% load staticfiles %}
+  <button class="resButton" id="wood"><span></span></button>
+  <button class="resButton" id="wood"><span></span></button>
+  <button class="resButton" id="wood"><span></span></button>
+  <button class="resButton" id="wood"><span></span></button>
+  <button class="resButton" id="wood"><span></span></button>
+  <button class="resButton" id="wood"><span></span></button>
 
 </div>
 
