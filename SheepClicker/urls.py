@@ -19,5 +19,6 @@ from sheepclick import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^sheep/', views.sheep, name='sheep')
+    url(r'^sheep/', views.sheep, name='sheep'),
+    url(r'^the_void/', views.form_test, name='form_test')
 ]
