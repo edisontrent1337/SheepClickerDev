@@ -39,11 +39,12 @@ body {
 .resicon_small, .resicon_middle, .resicon_big {
     float:left;
     margin-right:10px;
+
     }
 
 .resicon_small {
-        width:32px;
-    height:32px;
+        width:64px;
+    height:64px;
     }
 
 .resicon_middle {
