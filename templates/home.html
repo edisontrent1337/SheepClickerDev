@@ -57,8 +57,8 @@
 
     /** Update the Data presented in the view */
     function updateView() {
-      updateCreditCounter();
-      $('#upd').html(rate);
+      $('#res').html(makeHumanReadable(credit));
+      $('#upd').html(makeHumanReadable(rate));
       $('#level').html(level);
       $('#cost').html(upgradeCost);
       $('#perClick').html(perClick);
@@ -116,32 +116,36 @@
 
         updateView();
       }
-    })
+    });
 
-    function updateCreditCounter() {
-      var creditSuffix;
-      var creditPrefix;
+
+    /** Get a more readable string for big values */
+    function makeHumanReadable(value) {
+      var suffix = "";
+      var prefix = "";
+
+      //TODO switch(value.getPrecision())
       if (credit > 1000000000000000) {
-        creditPrefix = (credit / 1000000000000000).toPrecision(3);
-        creditSuffix = "Quadrillion";
-      } else if (credit > 1000000000000) {
-        creditPrefix = (credit / 1000000000000).toPrecision(3);
-        creditSuffix = "Trillion";
-      } else if (credit > 1000000000) {
-        creditPrefix = (credit / 1000000000).toPrecision(3);
-        creditSuffix = "Billion";
-      } else if (credit > 1000000) {
-        creditPrefix = (credit / 1000000).toPrecision(3);
-        creditSuffix = "Million";
-      } else if (credit >= 1000) {
-        creditPrefix = (credit / 1000).toPrecision(4);
-        creditSuffix = "Thousand";
+        prefix = (value / 1000000000000000).toPrecision(3);
+        suffix = "Quadrillion";
+      } else if (value > 1000000000000) {
+        prefix = (value / 1000000000000).toPrecision(3);
+        suffix = "Trillion";
+      } else if (value > 1000000000) {
+        prefix = (value / 1000000000).toPrecision(3);
+        suffix = "Billion";
+      } else if (value > 1000000) {
+        prefix = (value / 1000000).toPrecision(3);
+        suffix = "Million";
+      } else if (value >= 1000) {
+        prefix = (value / 1000).toPrecision(4);
+        suffix = "Thousand";
       } else {
-        creditPrefix = "";
-        creditSuffix = credit;
+        prefix = value;
+        suffix = "";
       }
 
-      $('#res').html(creditPrefix + " " + creditSuffix);
+      return (prefix + " " + suffix);
     }
 
 </script>
