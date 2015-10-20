@@ -3,14 +3,14 @@
 This should one day develop, to be a full fledged WebApplication that will
 seem to be a lot like CookieClicker.
 
-### Requirements
+## Requirements
 So far you'll only need to have Python3.x and Django installed.
 Preferrably you'll want to install virtualenv and pip as well if you haven't
 done so yet.
 
-### Installation
-#### Linux
-##### Django Server
+## Installation
+### Linux
+#### Django Server
 After installing virtualenv and pip, head into this project repository. Create a
 virtual environment by running
 
@@ -38,7 +38,7 @@ You should see the latest version of django being listed in
 You have successfully installed the Django server. For more information, see
 the [Django Quick Installation Guide](https://docs.djangoproject.com/en/1.8/intro/install/)
 
-##### Game
+#### Game
 Now all that is left for you to do, is running the server. If you run SheepClicker
 for the first time, you need to migrate the models to your local database. Do
 
