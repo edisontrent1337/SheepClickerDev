@@ -63,7 +63,7 @@ body {
   left: 0;
   width: 95%;
   padding:10px 2.5%;
-  height: 90px;
+  height: 98px;
   display:block;
 }
 
@@ -71,10 +71,10 @@ body {
 .resHolder{
   float:left;
   display:inline-block;
-  width:90px;
+  width:150px; /*90*/
   height:100%;
   margin-right:10px;
-  
+  //border:1px solid red;
 }
 
 .resAmount {
@@ -82,7 +82,7 @@ body {
   text-align:center;
   color:white;
   background-color:#2f3b3f;
-  margin:0px auto;
+  margin:0px auto 8px auto;
   width:70px;
   border-radius:8px;
   font-size:14px;
@@ -91,12 +91,12 @@ body {
 }
 
 .resButton {
-  width:56px;
-  height:56px;
+  width:64px;
+  height:64px;
   display: block;
-  margin:0px auto 8px auto;
+  margin:0px auto 10px auto;
   background:url(../img/wood_blue.png);
-  background-size: 56px 56px;
+  background-size: 64px 64px;
   background-repeat: no-repeat;
   background-position: top;
   border:none;
