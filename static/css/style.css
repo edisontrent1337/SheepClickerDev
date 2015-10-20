@@ -36,25 +36,6 @@ body {
     }
 
 
-.resicon_small, .resicon_middle, .resicon_big {
-    float:left;
-    margin-right:10px;
-
-    }
-
-.resicon_small {
-    width:64px;
-    height:64px;
-    }
-
-.resicon_middle {
-    width:64px;
-    height:64px;
-    }
-
-.resicon_big {
-    }
-
 .paper {
   background-color: #495C63;
   position: fixed;
@@ -74,7 +55,6 @@ body {
   width:150px; /*90*/
   height:100%;
   margin-right:10px;
-  //border:1px solid red;
 }
 
 .resAmount {
@@ -90,6 +70,7 @@ body {
 
 }
 
+
 .resButton {
   width:64px;
   height:64px;
@@ -100,4 +81,12 @@ body {
   background-repeat: no-repeat;
   background-position: top;
   border:none;
+  -webkit-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
+  position:relative;
+  outline:none;
+  border-radius: 50%;
+  overflow: hidden;
 }
