@@ -47,7 +47,7 @@
   <script>
 
   var credit = 0; // players credit that can be spent on upgrades
-  var perClick = 1; // players profit per mining
+  var perClick = 100; // players profit per mining
   var rate = 1; // amount added to players credit per second
   var level = 1; // current player level. increased by upgrade
   var upgradeCost = 75; // score needed to rise level
@@ -61,7 +61,7 @@
 
   /** Update the Data presented in the view */
   function updateView() {
-    $('#res').html(credit);
+    $('#wood').html(thousandSep(credit));
     $('#upd').html(rate);
     $('#level').html(level);
     $('#cost').html(upgradeCost);
@@ -111,6 +111,13 @@
     }
   });
 
+/** Introduces decimal dots as separator for large numbers **/
+  function thousandSep(val) {
+    return String(val).split("").reverse().join("")
+                  .replace(/(\d{3}\B)/g, "$1.")
+                  .split("").reverse().join("");
+                }
+
   </script>
 
 </div>
@@ -127,12 +134,11 @@
 
 <div class="paper" id="resBar">
   {% load staticfiles %}
-  <button class="resButton" id="wood"><span></span></button>
-  <button class="resButton" id="wood"><span></span></button>
-  <button class="resButton" id="wood"><span></span></button>
-  <button class="resButton" id="wood"><span></span></button>
-  <button class="resButton" id="wood"><span></span></button>
-  <button class="resButton" id="wood"><span></span></button>
+  <div class="resHolder"><button class="resButton"></button><span class="resAmount" id="wood">6.701</span></div>
+  <div class="resHolder"><button class="resButton" id="wood2"></button><span class="resAmount">18.223</span></div>
+  <div class="resHolder"><button class="resButton" id="wood3"></button><span class="resAmount">4.231</span></div>
+  <div class="resHolder"><button class="resButton" id="wood4"></button><span class="resAmount">6.232</span></div>
+
 
 </div>
 
