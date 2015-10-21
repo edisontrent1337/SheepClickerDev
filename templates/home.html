@@ -27,116 +27,111 @@
 
 </div>
 <div id="content">
-  {% load staticfiles %}
-  <!-- <img src="{% static 'img/blue_tiled_cube.png' %}" alt="wtf"/>
 
-  <input type="button" class="button" value="Increase Income"/>-->
-
-
-  <input type="button" class="button_blue" id="mine" value="MINE"/>
-  <input type="button" class="button_green" id="upgrade" value="UPGRADE"/>
-
-  <span>Res:</span><span id="res">0</span></span>
-  <span>Update Rate:</span> <span id="upd">0.02</span></span>
-  <span>Level:</span><span id="level">1</span>
-  <span>Ugrade Cost:</span><span id="cost">75</span>
   <span>Per Click:</span><span id="perClick">1</span>
+<input type="button" class="button_green" id="upgrade" value="UPGRADE"/>
 
-
-
-  <script>
-
-  var credit = 0; // players credit that can be spent on upgrades
-  var perClick = 1; // players profit per mining
-  var rate = 1; // amount added to players credit per second
-  var level = 1; // current player level. increased by upgrade
-  var upgradeCost = 75; // score needed to rise level
-  var baseCost = 50;
-
-
-  $(document).ready( function() {  });
-
-  //update every second
-  window.setInterval("updateData()", 1000);
-
-  /** Update the Data presented in the view */
-  function updateView() {
-    $('#res').html(credit);
-    $('#upd').html(rate);
-    $('#level').html(level);
-    $('#cost').html(upgradeCost);
-    $('#perClick').html(perClick);
-  }
-
-  /** Update the Data in the model */
-  function updateData() {
-    addCredit(rate);
-    updateView();
-  }
-
-  /** Increase Credit by given amount (decrease if negative) */
-  function addCredit(amount) {
-    credit += amount;
-
-    // TODO make '100' variable
-    if (credit % 100 == 0) {
-      unlockAchievement();
-    }
-  }
-
-  /** User reached specific milestone (e.g. total score, 1000 credits ...)
-  * celebrate it ... with popups!
-  */
-  function unlockAchievement(data) {
-    alert ("Achievement unlocked!");
-  }
-
-  /** Increase credit by doing something useful, like clicking a button */
-  $('#mine').click (function() {
-    addCredit(perClick);
-    updateView();
-  });
-
-  /** Upgrade player level --> rise credit per second */
-  $('#upgrade').click(function() {
-    if(credit > upgradeCost) {
-      rate = Math.floor(rate*1.5 + level);
-      addCredit(-upgradeCost);
-
-      level++;
-      baseCost+= 0.10*0.01*level*baseCost;
-      upgradeCost = Math.floor(baseCost*level*1.5);
-
-      updateView();
-    }
-  });
-
-  </script>
-
-</div>
-
-<div id="iconbar">
-
-  {% load staticfiles %}
-
-<!--  <img src="{% static 'img/wood_blue.png' %}" alt="wtf" class="resicon_small"/>
-  <img src="{% static 'img/wood.png' %}" alt="wtf" class="resicon_middle"/>
-  <img src="{% static 'img/wood.png' %}" alt="wtf" class="resicon_big"/> -->
-
-</div>
 
 <div class="paper" id="resBar">
   {% load staticfiles %}
-  <button class="resButton" id="wood"><span></span></button>
-  <button class="resButton" id="wood"><span></span></button>
-  <button class="resButton" id="wood"><span></span></button>
-  <button class="resButton" id="wood"><span></span></button>
-  <button class="resButton" id="wood"><span></span></button>
-  <button class="resButton" id="wood"><span></span></button>
+  <div class="resHolder">
+    <section style="width:40%; height:100%;  float:left;  z-index:-1;">
+        <span class="resAmount" id="upd" style="text-align:left; padding-left:6px; color:#41ec55; width:150%;">0</span>
+        <span class="resAmount" id="cost" style="width:100%; margin-left:30%; margin-top:13px; text-align:left; padding-left:6px; color:red;">1</span>
+    </section>
+    <section style="width:60%; display:block;float:left;margin-left:-15px; z-index:30000;">
+        <button class="resButton" id="mine"><div style="margin-left:-50%;margin-top:72%; display:block;color:#fff; text-align:center; background-color:black; width:20px; font-size:18px; height:70px; width:200%; background: rgba(0,0,0,.33);"><span id="level"></span></div></button>
+        <span class="resAmount" id="wood">0</span>
+    </section>
+
+  </div>
+  <div class="resHolder"><button class="resButton" id="wood2"></button><span class="resAmount">18.223</span></div>
+  <div class="resHolder"><button class="resButton" id="wood3"></button><span class="resAmount">4.231</span></div>
+  <div class="resHolder"><button class="resButton" id="wood4"></button><span class="resAmount">6.232</span></div>
+
+  <button class="resButton"></button>
+
 
 </div>
 
 <div id="footer"></div>
 
+</div>
+<script>
+
+var credit = 0; // players credit that can be spent on upgrades
+var perClick = 5000; // players profit per mining
+var level = 1; // current player level. increased by upgrade
+var upgradeCost = 75; // score needed to rise level
+var baseCost = 50; // base costs for upgrades
+var loginTime = Date.now();
+
+var woodRate = 0.001; // rate of wood per 36000 s
+
+// TODO unchain game logic and view update
+// TODO implement a clever game loop
+// update data every 100ms
+window.setInterval("updateData()", 100); // 10 Tick
+// draw ressources as often as possible
+requestAnimationFrame(updateView);
+
+/** Update the Data presented in the view */
+function updateView() {
+  $('#wood').html(thousandSep(parseInt(credit)));
+  $('#upd').html('+' + thousandSep(Math.floor(woodRate * 36000)) + '/h');
+  $('#level').html(level);
+  $('#cost').html(thousandSep(parseInt(upgradeCost)));
+  $('#perClick').html(perClick);
+  requestAnimationFrame(updateView);
+}
+
+/** Update the Data in the model */
+function updateData() {
+  addCredit(woodRate);
+}
+
+/** Increase Credit by given amount (decrease if negative) */
+function addCredit(amount) {
+  credit += amount;
+  // TODO make '100' variable
+  if (credit % 100 == 0) {
+    unlockAchievement();
+  }
+}
+
+/** User reached specific milestone (e.g. total score, 1000 credits ...)
+* celebrate it ... with popups!
+*/
+function unlockAchievement(data) {
+  alert ("Achievement unlocked!");
+}
+
+/** Increase credit by doing something useful, like clicking a button */
+$('#mine').click (function() {
+  addCredit(perClick);
+  updateView();
+});
+
+/** Upgrade player level --> rise credit per second */
+$('#upgrade').click(function() {
+  if(credit > upgradeCost) {
+    woodRate = woodRate*1.2 + level*0.0001;
+    addCredit(-upgradeCost);
+    level++;
+    baseCost+= 0.10*0.01*level*baseCost;
+    upgradeCost = Math.floor(baseCost*(Math.pow(1.35,level)));
+
+    updateView();
+  }
+});
+
+/** Introduces decimal dots as separator for large numbers **/
+function thousandSep(val) {
+  return String(val).split("").reverse().join("")
+                .replace(/(\d{3}\B)/g, "$1.")
+                .split("").reverse().join("");
+              }
+
+</script>
 </body>
 </html>

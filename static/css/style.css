@@ -36,51 +36,57 @@ body {
     }
 
 
-.resicon_small, .resicon_middle, .resicon_big {
-    float:left;
-    margin-right:10px;
-
-    }
-
-.resicon_small {
-    width:64px;
-    height:64px;
-    }
-
-.resicon_middle {
-    width:64px;
-    height:64px;
-    }
-
-.resicon_big {
-
-    }
-
-
 .paper {
-/*  border: 1px solid #A4AFB3;
-  box-shadow: 4px 4px 10px grey;*/
   background-color: #495C63;
   position: fixed;
   z-index: 100;
-  bottom: 10px;
+  bottom: 0px;
   left: 0;
   width: 95%;
-  padding:0 2.5%;
-  height: 64px;
+  padding:10px 2.5%;
+  height: 98px;
   display:block;
 }
 
 
-.resButton {
+.resHolder{
   float:left;
-  margin:8px 10px 0 0;
-  width:48px;
-  height:48px;
+  display:inline-block;
+  width:150px; /*90*/
+  height:100%;
+  margin-right:10px;
+}
+
+.resAmount {
+  display:block;
+  text-align:center;
+  color:white;
+  background-color:#2f3b3f;
+  margin:0px auto 8px auto;
+  width:70px;
+  border-radius:8px;
+  font-size:14px;
+  padding:4px 5px;
+
+}
+
+
+.resButton {
+  width:64px;
+  height:64px;
   display: block;
+  margin:0px auto 10px auto;
   background:url(../img/wood_blue.png);
-  background-size: 48px 48px;
+  background-size: 64px 64px;
   background-repeat: no-repeat;
   background-position: top;
   border:none;
+  -webkit-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
+  position:relative;
+  outline:none;
+  border-radius: 50%;
+  overflow: hidden;
 }
