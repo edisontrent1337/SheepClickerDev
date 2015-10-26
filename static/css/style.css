@@ -70,7 +70,12 @@ body {
 
 }
 
-
+#steel-mine, #wool-mine {
+  background:url(../img/wood.png);
+  background-size: 64px 64px;
+  background-repeat: no-repeat;
+  background-position: top;
+}
 .resButton {
   width:64px;
   height:64px;
