@@ -61,8 +61,9 @@ function Game(){
   this.wood = new Ressource("wood", 0.0012, 50, 71, 1.35);
   this.wool = new Ressource("wool", 0.0009, 50, 47, 1.29);
   this.stone = new Ressource("stone", 0.0011, 50, 89, 1.36);
-  this.steel = new Ressource("steel", 0.00075, 50, 123, 1.46);
+  this.steel = new Ressource("steel", 0.00075, 50, 123, 1.42);
   this.ressources.push(this.wood, this.wool, this.stone, this.steel);
+  this.ticks = 16;
 
   /* MAIN LOOP */
   // TODO unchain game logic and view update
